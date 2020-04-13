@@ -16,13 +16,16 @@ appointmentRoutes.post('/', (request, response) => {
       .json({ message: 'This appointment is already booked' });
   }
 
-  const appointment = appointmentsRepository.create(provider, parseDate);
+  const appointment = appointmentsRepository.create({
+    provider,
+    date: parseDate,
+  });
 
   return response.json(appointment);
 });
 
 appointmentRoutes.get('/', (request, response) => {
-  response.status(200).json(appointmentsRepository.get());
+  response.status(200).json(appointmentsRepository.all());
 });
 
 export default appointmentRoutes;
