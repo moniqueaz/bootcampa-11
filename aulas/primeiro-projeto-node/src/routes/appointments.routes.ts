@@ -16,9 +16,9 @@ appointmentRoutes.post('/', (request, response) => {
       appointmentsRepository,
     );
 
-    return response.json(
-      createAppointment.execute({ provider, date: parseDate }),
-    );
+    return response
+      .status(201)
+      .json(createAppointment.execute({ provider, date: parseDate }));
   } catch (error) {
     return response.status(400).json({ error: error.message });
   }
