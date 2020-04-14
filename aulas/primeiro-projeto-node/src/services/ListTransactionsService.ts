@@ -1,11 +1,4 @@
-import Transactions from '../models/Transactions';
 import TransactinosRepository from '../repositories/TransactionsRespository';
-
-interface RequestDTO {
-  total: String;
-  value: number;
-  type: String;
-}
 
 class ListTransactionService {
   private transactionsRepository: TransactinosRepository;
@@ -16,26 +9,7 @@ class ListTransactionService {
 
   public execute() {
     const transactions = this.transactionsRepository.all();
-    const balance = transactions.reduce(
-      ({ income, outcome, total }, { type, value }) => {
-        total += value;
-        if (type === 'income') {
-          income += value;
-        } else if (type === 'outcome') {
-          outcome += value;
-        }
-        return {
-          income,
-          outcome,
-          total,
-        };
-      },
-      {
-        income: 0,
-        outcome: 0,
-        total: 0,
-      },
-    );
+    const balance = this.transactionsRepository.getBalance();
     return {
       transactions: [...transactions],
       balance,

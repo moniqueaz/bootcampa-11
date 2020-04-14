@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import TransactinosRepository from '../repositories/TransactionsRespository';
 import ListTransactionService from '../services/ListTransactionsService';
+import CreateTransactionService from '../services/CreateTransactionsService';
 
 const transactionsRoutes = Router();
 const transactionRepository = new TransactinosRepository();
@@ -12,17 +13,25 @@ transactionsRoutes.get('/', (request, response) => {
     );
 
     return response.status(200).json(listTransactionService.execute());
-  } catch (error) {}
-
-  response.status(200).json(transactionRepository.all());
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
 });
 
 transactionsRoutes.post('/', (request, response) => {
-  const { title, value, type } = request.body;
+  try {
+    const { title, value, type } = request.body;
 
-  return response
-    .status(201)
-    .json(transactionRepository.create({ title, value, type }));
+    const createTransactionService = new CreateTransactionService(
+      transactionRepository,
+    );
+
+    return response
+      .status(201)
+      .json(createTransactionService.execute({ title, value, type }));
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
 });
 
 export default transactionsRoutes;

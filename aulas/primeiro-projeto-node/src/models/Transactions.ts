@@ -7,9 +7,9 @@ class Transactions {
 
   value: number;
 
-  type: String;
+  type: 'income' | 'outcome';
 
-  constructor({ title, value, type }: Omit<Transactions, 'id'>) {
+  constructor({ title, value, type = 'income' }: Omit<Transactions, 'id'>) {
     this.id = uuid();
     this.title = title;
     this.value = value;
