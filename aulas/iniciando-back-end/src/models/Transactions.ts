@@ -1,9 +1,9 @@
 import { uuid } from 'uuidv4';
 
 class Transactions {
-  id: String;
+  id: string;
 
-  title: String;
+  title: string;
 
   value: number;
 

@@ -2,7 +2,7 @@ import Transactions from '../models/Transactions';
 import TransactinosRepository from '../repositories/TransactionsRespository';
 
 interface RequestDTO {
-  title: String;
+  title: string;
   value: number;
   type: 'income' | 'outcome';
 }
