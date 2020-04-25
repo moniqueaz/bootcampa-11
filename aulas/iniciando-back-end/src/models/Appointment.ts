@@ -7,7 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import User from './Users';
+import User from './User';
 
 @Entity('appointments')
 class Appointment {
@@ -25,7 +25,7 @@ class Appointment {
   date: Date;
 
   @CreateDateColumn()
-  create_at: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
