@@ -1,4 +1,3 @@
-import { uuid } from 'uuidv4';
 import {
   Entity,
   Column,
@@ -20,6 +19,9 @@ class Users {
 
   @Column()
   password: string;
+
+  @Column()
+  avatar: string;
 
   @CreateDateColumn()
   created_at: Date;
