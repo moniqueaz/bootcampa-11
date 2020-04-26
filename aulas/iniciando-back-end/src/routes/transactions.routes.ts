@@ -14,7 +14,7 @@ transactionsRoutes.get('/', (request, response) => {
 
     return response.status(200).json(listTransactionService.execute());
   } catch (error) {
-    return response.status(400).json({ error: error.message });
+    return response.status(error.statusCode).json({ error: error.message });
   }
 });
 
@@ -29,8 +29,8 @@ transactionsRoutes.post('/', (request, response) => {
     return response
       .status(201)
       .json(createTransactionService.execute({ title, value, type }));
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
+  } catch (error) {
+    return response.status(error.statusCode).json({ error: error.message });
   }
 });
 

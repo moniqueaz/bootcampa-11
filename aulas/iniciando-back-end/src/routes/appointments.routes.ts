@@ -22,7 +22,7 @@ appointmentRoutes.post('/', async (request, response) => {
       .status(201)
       .json(await createAppointment.execute({ provider_id, date: parseDate }));
   } catch (error) {
-    return response.status(400).json({ error: error.message });
+    return response.status(error.statusCode).json({ error: error.message });
   }
 });
 

@@ -7,7 +7,7 @@ class ListTransactionService {
     this.transactionsRepository = transactionsRepository;
   }
 
-  public execute() {
+  public execute(): object {
     const transactions = this.transactionsRepository.all();
     const balance = this.transactionsRepository.getBalance();
     return {

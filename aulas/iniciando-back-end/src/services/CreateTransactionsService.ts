@@ -1,3 +1,4 @@
+import AppError from '../errors/AppError';
 import Transactions from '../models/Transactions';
 import TransactinosRepository from '../repositories/TransactionsRespository';
 
@@ -19,7 +20,7 @@ class CreateTransactionService {
       type === 'outcome' &&
       this.transactionsRepository.getBalance().total < value
     ) {
-      throw Error('Balance sheet total less than outcome!');
+      throw new AppError('Balance sheet total less than outcome!');
     }
     const transaction = this.transactionsRepository.create({
       title,
